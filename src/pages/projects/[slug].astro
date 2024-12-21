@@ -1,0 +1,85 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = true;
+export async function getStaticPaths() {
+  // const {slug} = Astro.params
+  const projects = Object.values(
+    import.meta.glob("../../data/projects/*.md", {
+      eager: true,
+    })
+  );
+  return projects.map((project: any) => ({
+    params: {
+      slug: project.frontmatter.slug,
+    },
+    props: {
+      project,
+    },
+  }));
+}
+console.log(Astro.props)
+const { Content, frontmatter } = Astro.props.project;
+---
+
+<Layout title={frontmatter.title} metadesc={frontmatter.tagline}>
+  <div class="container p-6 lg:p-10 my-3">
+    <div class="prose max-w-none">
+    <h1>{frontmatter.title}</h1>
+    <div class="flex items-center gap-8">
+        {frontmatter.githubURL && <a href={frontmatter.githubURL} title="Source Code" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>}
+        {frontmatter.youtubeURL && <a href={frontmatter.youtubeURL} title="YouTube Preview" target="_blank"><i class="fa-brands fa-youtube fa-2x"></i></a>}
+    </div>
+      <p class="tracking-widest text-xs title-font font-medium text-gray-400">
+        {frontmatter.author} &bull; {frontmatter.created}
+      </p>
+      <hr class="my-3">
+      <Content />
+    </div>
+  </div>
+
+  <script>
+    const pres = document.querySelectorAll("pre");
+
+    Array.from(pres).forEach((element) => {
+      let copyBtn = document.createElement("button");
+      copyBtn.setAttribute(
+        "class",
+        "px-3 py-[2px] bg-blue-500 text-white float-end rounded"
+      );
+      copyBtn.innerHTML = "Copy";
+
+      element.insertAdjacentElement("afterbegin", copyBtn);
+
+      copyBtn.addEventListener("click", () => {
+        const code = element.getElementsByTagName("code")[0];
+        let codeText = code.textContent;
+
+        if (codeText?.startsWith("$")) {
+          codeText = codeText.replace(/^\$\s+/, "");
+        }
+
+        if (codeText) window.navigator.clipboard.writeText(codeText);
+
+        copyBtn.innerHTML = "Copied!";
+        copyBtn.setAttribute("disabled", "");
+        copyBtn.classList.add("disabled:cursor-not-allowed");
+        copyBtn.classList.add("disabled:bg-blue-400");
+
+        setTimeout(() => {
+          copyBtn.innerHTML = "Copy";
+          copyBtn.removeAttribute("disabled");
+          copyBtn.classList.remove("disabled:cursor-not-allowed");
+          copyBtn.classList.remove("disabled:bg-blue-400");
+        }, 3000);
+      });
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  pre,
+  code {
+    @apply px-3 py-4 rounded;
+  }
+</style>
