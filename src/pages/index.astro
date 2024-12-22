@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import {Hero} from '../components/Hero'
+---
+
+<Layout title="Home" metadesc="Welcome to Lakshyaraj's Portfolio website!">
+	<div class="container p-6 lg:p-10 my-3">
+		<Hero client:load />
+	</div>
+</Layout>

@@ -1,0 +1,42 @@
+---
+import { ClientRouter } from "astro:transitions";
+import Navbar from "../components/Navbar.astro";
+
+const { title, metadesc } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={metadesc}>
+    <link rel="icon" type="image/svg+xml" href="/images/logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>{title} | Lakshyaraj Dash</title>
+
+    <ClientRouter fallback="swap" />
+  </head>
+  <body>
+    <Navbar />
+    <slot />
+
+    <script>
+      document.addEventListener('astro:page-load', function() {
+        const menu: HTMLUListElement = document.querySelector("ul#menu") as HTMLUListElement;
+        const toggleMenuBtn: HTMLButtonElement = document.querySelector("button#toogleMenu") as HTMLButtonElement;
+
+        toggleMenuBtn.addEventListener("click", (e) => {
+          if (menu.classList.contains("hidden")) {
+            menu.classList.remove("hidden");
+            menu.classList.add("flex-col");
+          } else {
+            menu.classList.remove("flex-col");
+            menu.classList.add("hidden");
+          }
+        });
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const {slug} = Astro.params;
+const project = await getEntry('projects', slug);
+
+const {Content} = await project.render();
+---
+
+<Layout title={project.data.title} metadesc={project.data.tagline}>
+  <div class="container p-6 lg:p-10 my-3">
+    <div class="prose max-w-none">
+    <h1>{project.data.title}</h1>
+    <div class="flex items-center gap-8">
+        {project.data.githubURL && <a href={project.data.githubURL} title="Source Code" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>}
+        {project.data.youtubeURL && <a href={project.data.youtubeURL} title="YouTube Preview" target="_blank"><i class="fa-brands fa-youtube fa-2x"></i></a>}
+    </div>
+      <p class="tracking-widest text-xs title-font font-medium text-gray-400">
+        {project.data.author} &bull; {project.data.created}
+      </p>
+      <hr class="my-3">
+      <Content />
+    </div>
+  </div>
+
+  <script>
+    const pres = document.querySelectorAll("pre");
+
+    Array.from(pres).forEach((element) => {
+      let copyBtn = document.createElement("button");
+      copyBtn.setAttribute(
+        "class",
+        "px-3 py-[2px] bg-blue-500 text-white float-end rounded"
+      );
+      copyBtn.innerHTML = "Copy";
+
+      element.insertAdjacentElement("afterbegin", copyBtn);
+
+      copyBtn.addEventListener("click", () => {
+        const code = element.getElementsByTagName("code")[0];
+        let codeText = code.textContent;
+
+        if (codeText?.startsWith("$")) {
+          codeText = codeText.replace(/^\$\s+/, "");
+        }
+
+        if (codeText) window.navigator.clipboard.writeText(codeText);
+
+        copyBtn.innerHTML = "Copied!";
+        copyBtn.setAttribute("disabled", "");
+        copyBtn.classList.add("disabled:cursor-not-allowed");
+        copyBtn.classList.add("disabled:bg-blue-400");
+
+        setTimeout(() => {
+          copyBtn.innerHTML = "Copy";
+          copyBtn.removeAttribute("disabled");
+          copyBtn.classList.remove("disabled:cursor-not-allowed");
+          copyBtn.classList.remove("disabled:bg-blue-400");
+        }, 3000);
+      });
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  pre,
+  code {
+    @apply px-3 py-4 rounded;
+  }
+</style>

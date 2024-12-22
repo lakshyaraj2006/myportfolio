@@ -1,0 +1,57 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
+---
+
+<Layout title="Projects" metadesc="Browse my projects">
+  <section class="text-gray-600 body-font">
+    <div class="container p-5 mx-auto">
+      <!-- Search form -->
+      <form action="/projects/search" class="flex items-center gap-4 mb-4">
+          <input type="search" name="query" id="query" class="w-full border border-blue-500 outline-none focus:outline-blue-500 focus:ring-blue-500 px-3 py-1 rounded" placeholder="Search my projects...">
+          <button type="submit" class="bg-blue-500 active:bg-blue-600 text-white px-3 py-1 rounded">
+              <i class="fa fa-search text-lg"></i>
+          </button>
+      </form>
+      <div class="flex flex-wrap -m-4">
+        {
+          projects.map(project => {
+            return (
+              <div class="p-4 md:w-1/3">
+                <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
+                  <img
+                    class="lg:h-48 md:h-36 w-full object-cover object-center"
+                    src="/images/default.jpg"
+                    alt="blog"
+                  />
+                  <div class="p-6">
+                    <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                      {project.data.author} &bull;{" "}
+                      {project.data.created}
+                    </h2>
+                    <h1 class="title-font text-lg font-medium text-gray-900 mb-3">
+                      {project.data.title}
+                    </h1>
+                    <p class="leading-relaxed mb-6">
+                      {project.data.tagline}
+                    </p>
+                    <div class="flex items-center flex-wrap">
+                      <a
+                        href={`/projects/${project.data.slug}`}
+                        class="bg-blue-500 text-white w-full py-2 rounded inline-flex items-center justify-center md:mb-2 lg:mb-0"
+                      >
+                        Read More
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

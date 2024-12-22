@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection, type CollectionEntry } from "astro:content";
+const query = Astro.url.searchParams.get("query");
+
+let posts: CollectionEntry<'blogs'>[] = await getCollection('blogs');
+
+posts = posts.filter((post) => {
+    if (post.data.title.toLowerCase().includes(query?.toLowerCase())) {
+        return post;
+    }
+})
+
+---
+
+<Layout title=`Search Results for ${query}`>
+    <section class="text-gray-600 body-font">
+        <div class="container p-5 mx-auto">
+          <!-- Search form -->
+          <form action="/blog/search" class="flex items-center gap-4 mb-4">
+              <input type="search" name="query" id="query" class="w-full border border-blue-500 outline-none focus:outline-blue-500 focus:ring-blue-500 px-3 py-1 rounded" placeholder="Search my blog...">
+              <button type="submit" class="bg-blue-500 active:bg-blue-600 text-white px-3 py-1 rounded">
+                  <i class="fa fa-search text-lg"></i>
+              </button>
+          </form>
+          {posts.length !== 0 && <div class="flex flex-wrap -m-4">
+            {
+              posts.map((post) => {
+                return <PostCard {...post.data} />;
+              })
+            }
+          </div>}
+          {posts.length === 0 && <div class="bg-gray-300 p-8 rounded">
+            <h1 class="text-4xl font-bold text-gray-800">No search results found for "{query}"</h1>
+          </div>}
+        </div>
+    </section>
+</Layout>

@@ -1,0 +1,31 @@
+---
+const pathname = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.png" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>404: Page Not Found</title>
+  </head>
+  <body>
+    <h1 class="text-red-500 font-bold text-4xl">404: Page Not Found</h1>
+    <p>
+        <code dir="auto">{pathname}</code>
+    </p>
+    <button class="px-6 py-2 bg-black text-white hover:opacity-90 rounded" onclick="window.history.back();">&larr; Go Back</button>
+  </body>
+</html>
+
+<style scoped>
+    html, body {
+        height: 100%;
+    }
+
+    body {
+        @apply flex flex-col gap-6 items-center justify-center;
+    }
+</style>

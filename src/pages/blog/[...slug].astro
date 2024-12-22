@@ -1,0 +1,67 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+const {slug} = Astro.params;
+const post = await getEntry('blogs', slug);
+
+const {Content} = await post.render();
+---
+
+<Layout title={post.data.title} metadesc={post.data.tagline}>
+  <div class="container p-6 lg:p-10 my-3">
+    <div class="prose max-w-none">
+      <h1>{post.data.title}</h1>
+      <p class="tracking-widest text-xs title-font font-medium text-gray-400">
+        {post.data.author} &bull; {post.data.created}
+      </p>
+      <hr class="my-3">
+      <Content />
+    </div>
+  </div>
+
+  <script>
+    const pres = document.querySelectorAll("pre");
+
+    Array.from(pres).forEach((element) => {
+      let copyBtn = document.createElement("button");
+      copyBtn.setAttribute(
+        "class",
+        "px-3 py-[2px] bg-blue-500 text-white float-end rounded"
+      );
+      copyBtn.innerHTML = "Copy";
+
+      element.insertAdjacentElement("afterbegin", copyBtn);
+
+      copyBtn.addEventListener("click", () => {
+        const code = element.getElementsByTagName("code")[0];
+        let codeText = code.textContent;
+
+        if (codeText?.startsWith("$")) {
+          codeText = codeText.replace(/^\$\s+/, "");
+        }
+
+        if (codeText) window.navigator.clipboard.writeText(codeText);
+
+        copyBtn.innerHTML = "Copied!";
+        copyBtn.setAttribute("disabled", "");
+        copyBtn.classList.add("disabled:cursor-not-allowed");
+        copyBtn.classList.add("disabled:bg-blue-400");
+
+        setTimeout(() => {
+          copyBtn.innerHTML = "Copy";
+          copyBtn.removeAttribute("disabled");
+          copyBtn.classList.remove("disabled:cursor-not-allowed");
+          copyBtn.classList.remove("disabled:bg-blue-400");
+        }, 3000);
+      });
+    });
+  </script>
+</Layout>
+
+<style is:global>
+  pre,
+  code {
+    @apply px-3 py-4 rounded;
+  }
+</style>
