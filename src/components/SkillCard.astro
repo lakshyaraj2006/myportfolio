@@ -1,15 +1,14 @@
 ---
 interface Props {
-    skill: string,
-    index: number
+    skill: string
 }
 const props: Props = Astro.props;
-import {SKILL_ICONS} from "../constants"
+import SKILLS from "../constants"
 ---
 
 <div class="shadow border p-6 rounded relative my-4 cursor-pointer hover:-translate-y-2 transition-all text-center">
     <div class="absolute -top-4 -right-2 w-fit bg-gray-200 p-[8px] rounded-full flex items-center justify-center">
-        <img src={SKILL_ICONS[props.index]} class="w-8" alt="">
+        <img src={SKILLS[props.skill]} class="w-8" alt="">
     </div>
 
     <h2 class="text-lg font-bold">{props.skill}</h2>
