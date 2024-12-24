@@ -1,10 +1,20 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import {Hero} from '../components/Hero'
+import {SKILLS} from '../constants';
+import SkillCard from '../components/SkillCard.astro';
 ---
 
 <Layout title="Home" metadesc="Welcome to Lakshyaraj's Portfolio website!">
 	<div class="container p-6 lg:p-10 my-3">
 		<Hero client:load />
+	</div>
+	<div class="container p-6 lg:p-10 my-3">
+		<h2 class="text-xl font-bold">Tech Stacks:</h2>
+		<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+			{SKILLS.map((skill, index) => {
+				return <SkillCard skill={skill} index={index} />
+			})}
+		</div>
 	</div>
 </Layout>
