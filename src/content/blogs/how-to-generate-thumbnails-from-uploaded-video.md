@@ -4,7 +4,7 @@ tagline: We will learn how to generate thumbnails from uploaded video using node
 slug: how-to-generate-thumbnails-from-uploaded-video
 tags: ffmpeg, nodejs
 created: Fri 12 Dec 2024
-author: Lakhyaraj Dash
+author: Lakshyaraj Dash
 ---
 
 In this tutorial, you will learn how to generate thumbnails from a video file.
