@@ -12,6 +12,11 @@ const {Content} = await post.render();
   <div class="container p-6 lg:p-10 my-3">
     <div class="prose max-w-none">
       <h1>{post.data.title}</h1>
+      <div class="flex flex-wrap gap-2 my-2">
+        {post.data.tags.replace(/\s/g, "").split(",").map((tag: string) => {
+          return <span class="px-2 py-1 bg-blue-200 text-blue-500 font-bold rounded-full text-xs hover:bg-blue-500 hover:text-white cursor-pointer">{tag}</span>
+        })}
+      </div>
       <p class="tracking-widest text-xs title-font font-medium text-gray-400">
         {post.data.author} &bull; {post.data.created}
       </p>

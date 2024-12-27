@@ -2,6 +2,7 @@
 title: 5 awesome VS Code themes
 tagline: 5 awesome themes for microsoft visual studio code to increase your productivity.
 slug: 5-awesome-vscode-themes
+tags: vs-code
 created: Sun 22 Dec 2024
 author: Lakshyaraj Dash
 ---

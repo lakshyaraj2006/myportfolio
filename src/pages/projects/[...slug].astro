@@ -11,11 +11,16 @@ const {Content} = await project.render();
 <Layout title={project.data.title} metadesc={project.data.tagline}>
   <div class="container p-6 lg:p-10 my-3">
     <div class="prose max-w-none">
-    <h1>{project.data.title}</h1>
-    <div class="flex items-center gap-8">
+      <h1>{project.data.title}</h1>
+      <div class="flex items-center gap-8">
         {project.data.githubURL && <a href={project.data.githubURL} title="Source Code" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>}
         {project.data.youtubeURL && <a href={project.data.youtubeURL} title="YouTube Preview" target="_blank"><i class="fa-brands fa-youtube fa-2x"></i></a>}
-    </div>
+      </div>
+      <div class="flex flex-wrap gap-2 my-2">
+        {project.data.tags.replace(/\s/g, "").split(",").map((tag: string) => {
+          return <span class="px-2 py-1 bg-blue-200 text-blue-500 font-bold rounded-full text-xs hover:bg-blue-500 hover:text-white cursor-pointer">{tag}</span>
+        })}
+      </div>
       <p class="tracking-widest text-xs title-font font-medium text-gray-400">
         {project.data.author} &bull; {project.data.created}
       </p>
