@@ -28,44 +28,6 @@ const {Content} = await project.render();
       <Content />
     </div>
   </div>
-
-  <script>
-    const pres = document.querySelectorAll("pre");
-
-    Array.from(pres).forEach((element) => {
-      let copyBtn = document.createElement("button");
-      copyBtn.setAttribute(
-        "class",
-        "px-3 py-[2px] bg-blue-500 text-white float-end rounded"
-      );
-      copyBtn.innerHTML = "Copy";
-
-      element.insertAdjacentElement("afterbegin", copyBtn);
-
-      copyBtn.addEventListener("click", () => {
-        const code = element.getElementsByTagName("code")[0];
-        let codeText = code.textContent;
-
-        if (codeText?.startsWith("$")) {
-          codeText = codeText.replace(/^\$\s+/, "");
-        }
-
-        if (codeText) window.navigator.clipboard.writeText(codeText);
-
-        copyBtn.innerHTML = "Copied!";
-        copyBtn.setAttribute("disabled", "");
-        copyBtn.classList.add("disabled:cursor-not-allowed");
-        copyBtn.classList.add("disabled:bg-blue-400");
-
-        setTimeout(() => {
-          copyBtn.innerHTML = "Copy";
-          copyBtn.removeAttribute("disabled");
-          copyBtn.classList.remove("disabled:cursor-not-allowed");
-          copyBtn.classList.remove("disabled:bg-blue-400");
-        }, 3000);
-      });
-    });
-  </script>
 </Layout>
 
 <style is:global>
