@@ -1,8 +1,11 @@
 ---
+import { Badge } from "./ui/badge";
+import { buttonVariants } from "./ui/button";
+
 const { title, tagline, slug, tags, created, author } = Astro.props;
 ---
 
-<div class="p-4 md:w-1/3">
+<!-- <div class="p-4 md:w-1/3">
   <div class="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
     <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="/images/default.jpg" alt="blog"
     />
@@ -27,5 +30,34 @@ const { title, tagline, slug, tags, created, author } = Astro.props;
         </a>
       </div>
     </div>
+  </div>
+</div> -->
+<div class="shadow-lg rounded-lg overflow-hidden">
+  <img
+    class="w-full h-64 object-cover object-top"
+    src="/images/default.jpg"
+    alt={title}
+  />
+  <div class="p-4">
+    <p class="mb-2">{author} &bull; {created}</p>
+    <h2 class="text-xl font-semibold mb-2 dark:text-white">{title}</h2>
+    <div class="flex flex-wrap gap-2 my-2">
+      {
+        tags
+          .replace(/\s/g, "")
+          .split(",")
+          .map((tag: string) => {
+            return (
+              <Badge variant="default" className="cursor-pointer" client:load>
+                {tag}
+              </Badge>
+            );
+          })
+      }
+    </div>
+    <p class="mb-4 dark:text-gray-400">{tagline}</p>
+    <a href={`/blog/${slug}`} class={buttonVariants({ variant: "secondary" })}>
+      Read More
+    </a>
   </div>
 </div>

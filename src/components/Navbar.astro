@@ -1,24 +1,39 @@
-<nav class="block lg:flex items-center justify-between bg-blue-500 py-2 px-4 relative">
-    <div class="flex items-center justify-between">
-        <a href="/" class="flex items-center gap-4">
-            <img src="/images/logo.png" width="48" height="48" alt="">
-            <span class="text-white">Lakshyaraj Dash</span>
-        </a>
-        <button class="block lg:hidden" id="toogleMenu"><i class="fa fa-bars text-white"></i></button>
-    </div>
+---
+import { ModeToggle } from "./ModeToggle";
+import { buttonVariants } from "./ui/button";
+import MobileNav from "./MobileNav";
+---
 
-    <ul class="hidden lg:flex items-center gap-8" id="menu">
-        <li class="my-4 lg:my-0">
-            <a href="/" class="text-white hover:opacity-90">Home</a>
-        </li>
-        <li class="my-4 lg:my-0">
-            <a href="/projects" class="text-white hover:opacity-90">Projects</a>
-        </li>
-        <li class="my-4 lg:my-0">
-            <a href="/blog" class="text-white hover:opacity-90">Blog</a>
-        </li>
-        <li class="my-4 lg:my-0">
-            <a href="/docs/resume.pdf" class="bg-gray-600 hover:bg-gray-700 text-white px-3 py-2 rounded">Resume</a>
-        </li>
-    </ul>
+<nav
+  class="h-16 bg-background/50 sticky top-0 border-b px-8 backdrop-blur flex items-center justify-between z-10"
+>
+  <a href="/" class="flex items-center gap-4">
+    <img src="/images/logo.png" width="48" height="48" alt="" />
+  </a>
+
+  <ul class="hidden md:flex items-center justify-end space-x-6 w-full mr-6">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="/projects">Projects</a>
+    </li>
+    <li>
+      <a href="/blog">Blog</a>
+    </li>
+    <li>
+      <a href="/docs/resume.pdf" class={buttonVariants({ variant: "default" })}
+        >Resume</a
+      >
+    </li>
+  </ul>
+
+  <ul class="flex items-center space-x-4">
+    <li>
+        <ModeToggle client:load />
+    </li>
+    <li>
+        <MobileNav client:load />
+    </li>
+  </ul>
 </nav>

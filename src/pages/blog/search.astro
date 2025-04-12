@@ -1,6 +1,6 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import PostCard from "../../components/PostCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import PostCard from "@/components/PostCard.astro";
 import { getCollection, type CollectionEntry } from "astro:content";
 const query = Astro.url.searchParams.get("query");
 
@@ -18,21 +18,49 @@ posts = posts.filter((post) => {
     <section class="text-gray-600 body-font">
         <div class="container p-5 mx-auto">
           <!-- Search form -->
-          <form action="/blog/search" class="flex items-center gap-4 mb-4">
-              <input type="search" name="query" id="query" class="w-full border border-blue-500 outline-none focus:outline-blue-500 focus:ring-blue-500 px-3 py-1 rounded" placeholder="Search my blog...">
-              <button type="submit" class="bg-blue-500 active:bg-blue-600 text-white px-3 py-1 rounded">
-                  <i class="fa fa-search text-lg"></i>
+          <div class="my-6 bg-transparent border rounded-lg dark:border-gray-700 w-full focus-within:border-primary focus-within:ring focus-within:ring-primary dark:focus-within:border-primary focus-within:ring-opacity-20">
+            <form
+              action="/blog/search"
+              class="flex flex-wrap justify-between md:flex-row"
+            >
+              <input
+                type="search"
+                name="query"
+                placeholder="Search Blog Articles..."
+                required
+                class="flex-1 h-10 px-4 m-1 text-gray-700 placeholder-gray-400 bg-transparent border-none appearance-none lg:h-12 dark:text-gray-200 focus:outline-none focus:placeholder-transparent focus:ring-0"
+              />
+
+              <button
+                type="submit"
+                class="flex items-center justify-center w-full p-2 m-1 dark:bg-gray-800 text-white transition-colors duration-300 transform rounded-lg lg:w-12 lg:h-12 lg:p-0 bg-primary hover:bg-primary/70 focus:outline-none focus:bg-primary/70"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-line-cap="round"
+                    stroke-line-join="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
               </button>
-          </form>
-          {posts.length !== 0 && <div class="flex flex-wrap -m-4">
+            </form>
+          </div>
+          {posts.length !== 0 && <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {
               posts.map((post) => {
                 return <PostCard {...post.data} />;
               })
             }
           </div>}
-          {posts.length === 0 && <div class="bg-gray-300 p-8 rounded">
-            <h1 class="text-4xl font-bold text-gray-800">No search results found for "{query}"</h1>
+          {posts.length === 0 && <div class="prose dark:prose-invert">
+            <h1 class="text-4xl font-bold">No search results found for "{query}"</h1>
           </div>}
         </div>
     </section>
