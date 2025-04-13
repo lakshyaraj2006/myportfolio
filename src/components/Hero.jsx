@@ -24,30 +24,23 @@ export const Hero = () => {
 
     return (
         <>
-            <section className="container px-4 py-10 mx-auto lg:h-128 lg:space-x-8 lg:flex lg:items-center">
-                <div className="w-full text-center lg:text-left lg:w-1/2 lg:-mt-8">
-                    <h1 className="text-3xl mb-6 leading-snug text-gray-800 dark:text-gray-200 md:text-4xl font-bold">
-                        Lakshyaraj Dash
-                    </h1>
-                    <h2 className="text-2xl">
-                        My Skills include <span className="font-semibold underline decoration-primary" ref={el}></span>
-                    </h2>
+            <section className="container px-4 py-10 mx-auto text-center">
+                <img src="/images/logo.png" className="hidden md:flex justify-self-center mb-6" width="100" height="100" alt="" />
+                <h1 className="text-3xl mb-6 leading-snug text-gray-800 dark:text-gray-200 md:text-4xl font-bold">
+                    Lakshyaraj Dash
+                </h1>
+                <h2 className="text-xl">
+                    My Skills include&nbsp;
+                    <br className="block md:hidden" />
+                    <span className="font-semibold underline decoration-primary" ref={el}></span>
+                </h2>
 
-                    <p className="mt-4 text-lg text-gray-500 dark:text-gray-300">
-                        I am a web developer enthusiast. Love to solve problems and face challenges. Browse my projects and my blog.
-                    </p>
-                    <div className="space-x-6 my-6">
-                        <a href="/projects" className={buttonVariants({ variant: "default" })}>Browse Projects</a>
-                        <a href="/blog" className={buttonVariants({ variant: "outline" })}>Browse Blog</a>
-                    </div>
-                </div>
-
-                <div className="hidden md:block w-full mt-4 lg:mt-0 lg:w-1/2">
-                    <img
-                        src="/images/hero.svg"
-                        alt="hero image"
-                        className="w-full h-full max-w-md mx-auto"
-                    />
+                <p className="mt-4 text-lg text-gray-500 dark:text-gray-300">
+                    I am a web developer enthusiast. Love to solve problems and face challenges. Browse my projects and my blog.
+                </p>
+                <div className="flex flex-col md:flex-row gap-6 items-center justify-center mt-6">
+                    <a href="/projects" className={buttonVariants({ variant: "default" })}>Browse Projects</a>
+                    <a href="/blog" className={buttonVariants({ variant: "outline" })}>Browse Blog</a>
                 </div>
             </section>
         </>
