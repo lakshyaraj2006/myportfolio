@@ -1,8 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
-import { buttonVariants } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import ProjectCard from "@/components/ProjectCard.astro";
 
 let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
