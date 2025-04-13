@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import PostCard from "@/components/PostCard.astro";
+import PostCard from "@/components/PostCard";
 import { getCollection, type CollectionEntry } from "astro:content";
 const query = Astro.url.searchParams.get("query");
 
@@ -55,7 +55,7 @@ posts = posts.filter((post) => {
           {posts.length !== 0 && <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {
               posts.map((post) => {
-                return <PostCard {...post.data} />;
+                return <PostCard {...post.data} client:load/>;
               })
             }
           </div>}
