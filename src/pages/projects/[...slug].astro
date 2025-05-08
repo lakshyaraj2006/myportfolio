@@ -11,7 +11,14 @@ const {Content} = await project.render();
 
 <Layout title={project.data.title} metadesc={project.data.tagline}>
   <div class="container p-6 lg:p-10 my-3">
-    <div class="prose dark:prose-invert max-w-none">
+    <div class="relative w-full overflow-hidden rounded-2xl shadow-lg" style="aspect-ratio: 16 / 9;">
+      <img
+        src={project.data.thumbnail ? project.data.thumbnail : "/images/default.webp"}
+        alt="Banner"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    </div>
+    <div class="prose dark:prose-invert max-w-none mt-6">
       <h1>{project.data.title}</h1>
       <div class="flex items-center gap-8">
         {project.data.githubURL && <a href={project.data.githubURL} title="Source Code" target="_blank"><i class="fa-brands fa-github fa-2x"></i></a>}

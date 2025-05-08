@@ -3,6 +3,7 @@ title: ChatX - Chat App
 tagline: A complete chat app using expressjs and socketio.
 slug: chatx-express-socketio
 tags: nodejs, express, socketio, websockets
+thumbnail: https://res.cloudinary.com/dfubkk4o0/image/upload/v1746678595/Screenshot_26_hwj09f.png
 created: Wed 07 May 2025
 author: Lakshyaraj Dash
 githubURL: https://github.com/lakshyaraj2006/chatx-express-socketio

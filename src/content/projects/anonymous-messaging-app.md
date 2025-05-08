@@ -3,6 +3,7 @@ title: MstryMessage
 tagline: Mystry Message is an annonymous messaging project.
 slug: anonymous-messaging-app
 tags: nextjs, typescript, mongodb
+thumbnail: https://res.cloudinary.com/dfubkk4o0/image/upload/v1746678238/Screenshot_23_b1ae1h.png
 created: Thu 23 Jan 2025
 author: Lakshyaraj Dash
 githubURL: https://github.com/lakshyaraj2006/mstrymessage

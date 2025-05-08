@@ -2,6 +2,7 @@
 title: FullStack React Authentication Project
 tagline: A full stack react authentication project made using MERN stack.
 slug: fullstack-react-authentication-project
+thumbnail: https://res.cloudinary.com/dfubkk4o0/image/upload/v1746676168/Screenshot_20_wzgxqg.png
 tags: reactjs, express, mern-stack, vite
 created: Fri 12 Dec 2024
 author: Lakshyaraj Dash

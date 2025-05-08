@@ -2,6 +2,7 @@
 title: BitUrls
 tagline: A url shortening web app made using MERN stack.
 slug: biturls-url-shortener
+thumbnail: https://res.cloudinary.com/dfubkk4o0/image/upload/v1746675786/Screenshot_19_cth8xo.png
 tags: react, vite, typescript, express, mongodb, mern
 created: Tue 11 Feb 2025
 author: Lakshyaraj Dash

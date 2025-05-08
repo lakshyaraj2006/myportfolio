@@ -1,14 +1,16 @@
 import { Badge } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
 
-const ProjectCard = ({ title, tagline, slug, tags, created, author }) => {
+const ProjectCard = ({ title, tagline, thumbnail, slug, tags, created, author }) => {
   return (
-    <div className="shadow-lg rounded-lg overflow-hidden">
-      <img
-        className="w-full h-64 object-cover object-top"
-        src="/images/default.jpg"
-        alt={title}
-      />
+    <div className="shadow-lg overflow-hidden border rounded">
+      <div className="relative w-full h-auto mx-h-64">
+        <img
+          className="w-full h-full object-cover"
+          src={thumbnail ? thumbnail : "/images/default.webp"}
+          alt={title}
+        />
+      </div>
       <div className="p-4">
         <p className="mb-2">{author} &bull; {created}</p>
         <h2 className="text-xl font-semibold mb-2 dark:text-white">{title}</h2>

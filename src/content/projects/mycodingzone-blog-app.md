@@ -3,6 +3,7 @@ title: MyCodingZone
 tagline: A nextjs blog app using tailwindcss, shadcnui, typescript, markdown & rehype.
 slug: mycodingzone-blog-app
 tags: nextjs, typescript
+thumbnail: https://res.cloudinary.com/dfubkk4o0/image/upload/v1746678378/Screenshot_25_hhmnel.png
 created: Sun 13 April 2025
 author: Lakshyaraj Dash
 githubURL: https://github.com/lakshyaraj2006/mycodingzone
