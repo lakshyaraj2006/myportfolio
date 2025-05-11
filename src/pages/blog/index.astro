@@ -3,17 +3,30 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import PostCard from "@/components/PostCard";
 import Layout from "@/layouts/Layout.astro";
 
-let posts: CollectionEntry<'blogs'>[] = await getCollection('blogs');
+let posts: CollectionEntry<"blogs">[] = await getCollection("blogs");
 ---
 
 <Layout title="Blog" metadesc="Browse my blog">
   <section class="text-gray-600 body-font">
     <div class="container p-5 mx-auto">
-      <h1 class="text-3xl font-bold mb-6 text-center my-2 dark:text-white">My Blogs</h1>
+      <h1 class="text-3xl font-bold mb-6 text-center my-2 dark:text-white">
+        My Blogs
+      </h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
-          posts.map(post => {
-            return <PostCard {...post.data} client:load/>;
+          posts.map((post) => {
+            return (
+              <PostCard
+                title={post.data.title}
+                tagline={post.data.tagline}
+                tags={post.data.tags}
+                slug={post.data.slug}
+                thumbnail={post.data.thumbnail}
+                author={post.data.author}
+                created={post.data.created}
+                client:load
+              />
+            );
           })
         }
       </div>

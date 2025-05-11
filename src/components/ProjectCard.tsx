@@ -1,7 +1,10 @@
 import { Badge } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
 
-const ProjectCard = ({ title, tagline, thumbnail, slug, tags, created, author }) => {
+const ProjectCard = (
+  { title, tagline, thumbnail, slug, tags, created, author }: 
+  { title: string, tagline: string, thumbnail: string | undefined, slug: string, tags: string, created: string, author: string }
+) => {
   return (
     <div className="shadow-lg overflow-hidden border rounded">
       <div className="relative w-full h-auto mx-h-64">

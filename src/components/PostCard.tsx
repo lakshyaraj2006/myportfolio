@@ -1,7 +1,10 @@
 import { Badge } from "./ui/badge";
 import { buttonVariants } from "./ui/button";
 
-const PostCard = ({ title, tagline, slug, thumbnail, tags, created, author }) => {
+const PostCard = (
+  { title, tagline, slug, thumbnail, tags, created, author }:
+  { title: string, tagline: string, slug: string, thumbnail: string | undefined, tags: string, created: string, author: string }
+) => {
   return <div className="shadow-lg overflow-hidden border rounded">
     <div className="relative w-full h-auto mx-h-64">
         <img

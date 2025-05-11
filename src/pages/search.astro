@@ -4,6 +4,10 @@ import Layout from "@/layouts/Layout.astro";
 import SearchResults from "@/components/SearchResults";
 const query = Astro.url.searchParams.get("query");
 
+if (!query) {
+  throw new Error("Query string required")
+}
+
 let projects: CollectionEntry<"projects">[] = await getCollection("projects");
 
 projects = projects.filter((project) => {

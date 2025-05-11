@@ -13,7 +13,15 @@ let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           projects.map(project => {
-            return <ProjectCard {...project.data} client:load/>;
+            return <ProjectCard 
+              title={project.data.title}
+              tagline={project.data.tagline}
+              tags={project.data.tags}
+              slug={project.data.slug}
+              thumbnail={project.data.thumbnail}
+              author={project.data.author}
+              created={project.data.created}
+            client:load/>;
           })
         }
       </div>

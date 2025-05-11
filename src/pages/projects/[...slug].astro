@@ -4,9 +4,16 @@ import Layout from "@/layouts/Layout.astro";
 import { Badge } from "@/components/ui/badge";
 
 const {slug} = Astro.params;
+
+if (slug === undefined) {
+  throw new Error("Slug is required!")
+}
+
 const project = await getEntry('projects', slug);
 
-const {Content} = await project.render();
+if (project === undefined) {
+  return Astro.redirect("/404");
+}
 ---
 
 <Layout title={project.data.title} metadesc={project.data.tagline}>
@@ -33,7 +40,7 @@ const {Content} = await project.render();
         {project.data.author} &bull; {project.data.created}
       </p>
       <hr class="my-3">
-      <Content />
+      <div set:html={project.rendered?.html}></div>
     </div>
   </div>
 </Layout>
