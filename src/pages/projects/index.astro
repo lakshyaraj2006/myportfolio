@@ -2,18 +2,39 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import ProjectCard from "@/components/ProjectCard";
+const query = Astro.url.searchParams.get("tagged");
+let projects: CollectionEntry<'projects'>[];
 
-let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
+if (!query) {
+  projects = await getCollection('projects');
+} else {
+  let searchResults: CollectionEntry<'projects'>[] = await getCollection('projects');
+  projects = searchResults.filter((result) => {
+    return result.data.tags
+              .replace(/\s/g, "")
+              .split(",")
+              .includes(query);
+  })
+}
+
 ---
 
 <Layout title="Projects" metadesc="Browse my projects">
   <section class="text-gray-600 body-font">
     <div class="container p-5 mx-auto">
       <h1 class="text-3xl font-bold mb-6 text-center my-2 dark:text-white">My Projects</h1>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          projects.map(project => {
-            return <ProjectCard 
+      {
+        (query && projects.length === 0) && <p class="dark:invert">No projects found containing the tag <em>"{query}"</em>.</p>
+      }
+      {
+        (!query && projects.length === 0) && <p class="dark:invert">No projects found.</p>
+      }
+      {
+        projects &&
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {
+            projects.map(project => {
+              return <ProjectCard 
               title={project.data.title}
               tagline={project.data.tagline}
               tags={project.data.tags}
@@ -21,10 +42,11 @@ let projects: CollectionEntry<'projects'>[] = await getCollection('projects');
               thumbnail={project.data.thumbnail}
               author={project.data.author}
               created={project.data.created}
-            client:load/>;
-          })
-        }
-      </div>
+              client:load/>;
+            })
+          }
+        </div>
+      }
     </div>
   </section>
 </Layout>

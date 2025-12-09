@@ -37,9 +37,11 @@ if (post === undefined) {
             .split(",")
             .map((tag: string) => {
               return (
-                <Badge variant="default" className="cursor-pointer">
-                  {tag}
-                </Badge>
+                <a href={`/blog?tagged=${tag}`}>
+                  <Badge variant="default" className="cursor-pointer">
+                    {tag}
+                  </Badge>
+                </a>
               );
             })
         }

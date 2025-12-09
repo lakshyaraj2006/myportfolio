@@ -2,8 +2,21 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import PostCard from "@/components/PostCard";
 import Layout from "@/layouts/Layout.astro";
+const query = Astro.url.searchParams.get("tagged");
 
-let posts: CollectionEntry<"blogs">[] = await getCollection("blogs");
+let posts: CollectionEntry<'blogs'>[];
+
+if (!query) {
+  posts = await getCollection('blogs');
+} else {
+  let searchResults: CollectionEntry<'blogs'>[] = await getCollection('blogs');
+  posts = searchResults.filter((result) => {
+    return result.data.tags
+              .replace(/\s/g, "")
+              .split(",")
+              .includes(query);
+  })
+}
 ---
 
 <Layout title="Blog" metadesc="Browse my blog">
@@ -12,6 +25,12 @@ let posts: CollectionEntry<"blogs">[] = await getCollection("blogs");
       <h1 class="text-3xl font-bold mb-6 text-center my-2 dark:text-white">
         My Blogs
       </h1>
+      {
+        (query && posts.length === 0) && <p class="dark:invert">No projects found containing the tag <em>"{query}"</em>.</p>
+      }
+      {
+        (!query && posts.length === 0) && <p class="dark:invert">No projects found.</p>
+      }
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {
           posts.map((post) => {

@@ -24,9 +24,11 @@ const ProjectCard = (
               .split(",")
               .map((tag) => {
                 return (
-                  <Badge key={tag} variant="default" className="cursor-pointer">
-                    {tag}
-                  </Badge>
+                  <a href={`/projects?tagged=${tag}`}>
+                    <Badge key={tag} variant="default" className="cursor-pointer">
+                      {tag}
+                    </Badge>
+                  </a>
                 );
               })
           }

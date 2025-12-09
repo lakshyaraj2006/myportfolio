@@ -23,9 +23,11 @@ const PostCard = (
             .split(",")
             .map((tag) => {
               return (
-                <Badge key={tag} variant="default" className="cursor-pointer">
-                  {tag}
-                </Badge>
+                <a href={`/blog?tagged=${tag}`}>
+                  <Badge key={tag} variant="default" className="cursor-pointer">
+                    {tag}
+                  </Badge>
+                </a>
               );
             })
         }

@@ -33,7 +33,9 @@ if (project === undefined) {
       </div>
       <div class="flex flex-wrap gap-2 my-2">
         {project.data.tags.replace(/\s/g, "").split(",").map((tag: string) => {
-          return <Badge variant="default" className="cursor-pointer" client:load>{tag}</Badge>
+          return <a href={`/projects/?tagged=${tag}`}>
+            <Badge variant="default" className="cursor-pointer" client:load>{tag}</Badge>
+          </a>
         })}
       </div>
       <p class="tracking-widest text-xs title-font font-medium text-gray-400">
