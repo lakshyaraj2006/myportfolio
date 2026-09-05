@@ -1,4 +1,5 @@
 ---
+import WarningAlert from "../components/WarningAlert.astro";
 const pathname = Astro.url.pathname;
 ---
 <!doctype html>
@@ -12,11 +13,14 @@ const pathname = Astro.url.pathname;
     <title>404: Page Not Found</title>
   </head>
   <body>
+    <WarningAlert />
+    <div class="flex-1 flex flex-col gap-6 items-center justify-center">
     <h1 class="text-red-500 font-bold text-4xl">404: Page Not Found</h1>
     <p>
         <code dir="auto">{pathname}</code>
     </p>
     <button class="px-6 py-2 bg-black text-white hover:opacity-90 rounded" onclick="window.history.back();">&larr; Go Back</button>
+    </div>
   </body>
 </html>
 
@@ -26,6 +30,6 @@ const pathname = Astro.url.pathname;
     }
 
     body {
-        @apply flex flex-col gap-6 items-center justify-center;
+        @apply flex flex-col;
     }
 </style>

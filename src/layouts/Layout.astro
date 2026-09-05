@@ -2,6 +2,7 @@
 import '@/styles/globals.css';
 import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
+import WarningAlert from "../components/WarningAlert.astro";
 
 const { title, metadesc } = Astro.props;
 ---
@@ -20,7 +21,10 @@ const { title, metadesc } = Astro.props;
     <ClientRouter />
   </head>
   <body>
-    <Navbar />
+    <header class="sticky top-0 z-40">
+      <WarningAlert />
+      <Navbar />
+    </header>
     <slot />
 
 	<script>
